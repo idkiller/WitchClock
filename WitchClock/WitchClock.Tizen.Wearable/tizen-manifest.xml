@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest package="org.tizen.example.WitchClock" version="1.0.0" api-version="4" xmlns="http://tizen.org/ns/packages">
   <profile name="wearable" />
-  <watch-application ambient-support="true" appid="org.tizen.example.WitchClock" exec="WitchClock.Tizen.Wearable.dll">
+  <watch-application ambient-support="true" appid="org.tizen.example.WitchClock" exec="WitchClock.Tizen.Wearable.dll" type="dotnet">
     <label>WitchWatch</label>
     <icon>WitchClock.Tizen.Wearable.png</icon>
+    <metadata key="http://tizen.org/metadata/prefer_dotnet_aot" value="true" />
   </watch-application>
   <feature name="http://tizen.org/feature/sensor.gyroscope">true</feature>
 </manifest>

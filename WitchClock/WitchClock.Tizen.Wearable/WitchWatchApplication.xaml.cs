@@ -19,11 +19,12 @@ namespace WitchClock
         public WitchWatchApplication()
         {
             InitializeComponent();
-
-            //bgShadow.TranslateTo(5, 5);
         }
 
         public DateTime Time { get; set; }
+
+        public double ShadowX { get; set; }
+        public double ShadowY { get; set; }
 
         public void Run()
         {
@@ -45,11 +46,18 @@ namespace WitchClock
                 double sec = SecondRotation(now);
 
                 moonstick.Rotation = hour;
-                moonstickShadow.Rotation = hour;
                 witch.Rotation = min;
                 witchShadow.Rotation = min;
                 star.Rotation = sec;
                 starShadow.Rotation = sec;
+
+                bgShadow.TranslationX = ShadowX;
+                witchShadow.TranslationX = ShadowX;
+                starShadow.TranslationX = ShadowX;
+                bgShadow.TranslationY = ShadowY;
+                witchShadow.TranslationY = ShadowY;
+                starShadow.TranslationY = ShadowY;
+
                 return moving;
             };
             Device.BeginInvokeOnMainThread(() =>
@@ -72,13 +80,12 @@ namespace WitchClock
             var tsc = new TaskCompletionSource<bool>();
 
             var taskMoonstick = moonstick.RotateTo(hour, length);
-            var taskMoonstickShadow = moonstickShadow.RotateTo(hour, length);
             var taskWitch = witch.RotateTo(min, length);
             var taskWitchShadow = witchShadow.RotateTo(min, length);
             var taskStar = star.RotateTo(sec, length);
             var taskStarShadow = starShadow.RotateTo(sec, length);
 
-            Task.WhenAll(taskMoonstick, taskMoonstickShadow, taskWitch, taskWitchShadow, taskStar, taskStarShadow)
+            Task.WhenAll(taskMoonstick, taskWitch, taskWitchShadow, taskStar, taskStarShadow)
                 .ContinueWith(t => tsc.SetResult(t.Result.All(x => x)));
 
             return tsc.Task;

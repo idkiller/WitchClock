@@ -6,16 +6,14 @@
         <ContentPage>
             <ContentPage.Content>
                 <AbsoluteLayout BackgroundColor="#000044">
-                    <Image x:Name="bgShadow" Source="images/bg_shadow.png"  AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"/>
                     <Image x:Name="castle" Source="images/witch_clock_castle.png" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"/>
-                    <Image x:Name="moonstickShadow" Source="images/witch_clock_moonstick_shadow.png" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"/>
-                    <Image x:Name="moonstick" Source="images/witch_clock_moonstick.png" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"/>
                     <Image x:Name="witchShadow" Source="images/witch_clock_witch_shadow.png" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"/>
-                    <Image x:Name="witch" Source="images/witch_clock_witch.png" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"/>
                     <Image x:Name="starShadow" Source="images/witch_clock_starstick_shadow.png" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"/>
+                    <Image x:Name="moonstick" Source="images/witch_clock_moonstick.png" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"/>
+                    <Image x:Name="witch" Source="images/witch_clock_witch.png" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"/>
                     <Image x:Name="star" Source="images/witch_clock_starstick.png" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"/>
-                    <Image x:Name="cityShadow" Source="images/witch_clock_city_shadow.png" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"/>
                     <Image x:Name="city" Source="images/witch_clock_city.png" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"/>
+                    <Image x:Name="bgShadow" Source="images/bg_shadow.png"  AbsoluteLayout.LayoutBounds="-10, -10, 1.2, 1.2" AbsoluteLayout.LayoutFlags="SizeProportional"/>
                 </AbsoluteLayout>
             </ContentPage.Content>
         </ContentPage>

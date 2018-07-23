@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using Tizen.Applications;
+using Tizen.Sensor;
 using Tizen.Wearable.CircularUI.Forms.Renderer.Watchface;
 
 namespace WitchClock
@@ -8,11 +9,29 @@ namespace WitchClock
     {
         bool initialized;
         WitchWatchApplication witchWatch;
+        GravitySensor gravity;
+
         protected override void OnCreate()
         {
             base.OnCreate();
             witchWatch = new WitchWatchApplication();
             LoadWatchface(witchWatch);
+            initialized = false;
+
+            if (GravitySensor.IsSupported)
+            {
+                gravity = new GravitySensor();
+                gravity.DataUpdated += OnSensorUpdate;
+            }
+        }
+
+        void OnSensorUpdate(object sender, GravitySensorDataUpdatedEventArgs e)
+        {
+            var dx = 20.0 * e.X / 9.8;
+            var dy = 20.0 * e.Y / 9.8;
+
+            witchWatch.ShadowX = -dx;
+            witchWatch.ShadowY = -dy;
         }
 
         protected override void OnTick(TimeEventArgs time)
@@ -25,14 +44,18 @@ namespace WitchClock
         {
             if (!initialized)
             {
-                witchWatch.MoveHands(900).ContinueWith(t => witchWatch.Run());
+                var time = GetCurrentTime();
+                witchWatch.Time = time.UtcTimestamp + TimeSpan.FromMilliseconds(time.Millisecond);
+                witchWatch.MoveHands(900).ContinueWith((Action<System.Threading.Tasks.Task<bool>>)((System.Threading.Tasks.Task<bool> t) => {
+                    witchWatch.Run();
+                    this.gravity.Start();
+                }));
                 initialized = true;
-                Console.WriteLine("----------------- 1");
             }
             else
             {
                 witchWatch.Run();
-                Console.WriteLine("----------------- 2");
+                gravity.Start();
             }
 
             base.OnResume();
@@ -42,6 +65,7 @@ namespace WitchClock
         {
             base.OnPause();
             witchWatch.StopHands();
+            gravity.Stop();
         }
 
         protected override void OnAmbientChanged(AmbientEventArgs mode)
