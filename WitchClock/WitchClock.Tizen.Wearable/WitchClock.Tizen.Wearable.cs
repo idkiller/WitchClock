@@ -18,6 +18,11 @@ namespace WitchClock
             LoadWatchface(witchWatch);
             initialized = false;
 
+            var now = GetCurrentTime().UtcTimestamp;
+            var initTime = new DateTime(now.Year, now.Month, now.Day, 8, 31, 3);
+            witchWatch.Time = initTime;
+            witchWatch.MoveHands();
+
             if (GravitySensor.IsSupported)
             {
                 gravity = new GravitySensor();

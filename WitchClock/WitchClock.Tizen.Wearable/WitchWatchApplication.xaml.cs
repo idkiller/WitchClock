@@ -91,6 +91,19 @@ namespace WitchClock
             return tsc.Task;
         }
 
+        public void MoveHands()
+        {
+            double hour = HourRotation(Time);
+            double min = MinuteRotation(Time);
+            double sec = SecondRotation(Time);
+
+            moonstick.Rotation = hour;
+            witch.Rotation = min;
+            witchShadow.Rotation = min;
+            star.Rotation = sec;
+            starShadow.Rotation = sec;
+        }
+
         double HourRotation(DateTime t) => (t.Hour >= 12 ? t.Hour - 12 : t.Hour) * 30 + t.Minute / 2.0 + t.Second / 12.0 + t.Millisecond / 120000.0;
         double MinuteRotation(DateTime t) => t.Minute * 6 + t.Second / 10.0 + t.Millisecond / 10000.0;
         double SecondRotation(DateTime t) => t.Second * 6 + t.Millisecond / 1000.0 * 6.0;
